@@ -5,7 +5,8 @@ console.log(resultData);
 
 function createMap() {
     
-    let colors = ["#E96D63", "#7FCA9F", "#F4BA70", "#85C1F5", "#4A789C", "#13A1CB", "#728CB0", "#C296B6", "#66ff99", "#ff99ff", "#ff6699", "#53e9d0"];
+    let colors = ["#ff6699", "#E96D63", "#7FCA9F", "#F4BA70", "#85C1F5", "#4A789C", "#13A1CB", "#728CB0", "#C296B6", "#c002ef", "#f70e29", "#0e64ef",
+     "#53e9d0", "#E96D63", "#7FCA9F", "#F4BA70", "#85C1F5", "#4A789C", "#13A1CB", "#728CB0", "#C296B6", "#66ff99", "#ff99ff"];
 
     let $divContainer = $("#tab-content");
 
@@ -46,8 +47,10 @@ function createMap() {
         shapeCreated: function(e) {
             let provNum = e.shape.dataItem.id;
             
+            let winnerColor = resultData.ResultsByRegion[provNum].results[1].number;
+
             if (provNum) {
-                e.shape.fill(colors[provNum % colors.length]);
+                e.shape.fill(colors[winnerColor]);
                 
             }
         },
