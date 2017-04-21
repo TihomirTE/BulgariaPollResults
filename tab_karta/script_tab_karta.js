@@ -1,3 +1,8 @@
+import { results } from "./../dependencies/results.js"
+
+let resultData = results();
+console.log(resultData);
+
 function createMap() {
     
     let colors = ["#E96D63", "#7FCA9F", "#F4BA70", "#85C1F5", "#4A789C", "#13A1CB", "#728CB0", "#C296B6", "#66ff99", "#ff99ff", "#ff6699", "#53e9d0"];
@@ -8,8 +13,15 @@ function createMap() {
     $divContainer.height(500);
 
     $divContainer.kendoMap({
+        controls: {
+            attribution: false,
+            navigator: false,
+            zoom: false
+        },
         center: [42.578129, 25.091893],
         zoom: 7,
+        zoomable: false,
+        pannable: false,
         layerDefaults: {
                 shape: {
                     style: {
@@ -32,15 +44,21 @@ function createMap() {
             }
         }],
         shapeCreated: function(e) {
-            var provNum = e.shape.dataItem.id;
+            let provNum = e.shape.dataItem.id;
+            
             if (provNum) {
                 e.shape.fill(colors[provNum % colors.length]);
+                
             }
         },
         shapeMouseEnter: function(e) {
+        
+                e.shape.stroke("black");
                 
-                e.shape.stroke("red");
+            },
+        shapeMouseLeave: function(e) {
                 
+                e.shape.stroke("white");
             }
         
     });
