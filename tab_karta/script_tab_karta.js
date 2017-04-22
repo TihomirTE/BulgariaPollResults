@@ -1,12 +1,11 @@
-import { results } from "./../dependencies/results.js"
+import { results } from "./../dependencies/results.js";
+import { getPartyColor } from "./PartyColorPicker.js";
+import { giveTemlpate } from "./buble.js"
+import Handlebars from "./../node_modules/handlebars/dist/handlebars.min.js"
 
 let resultData = results();
-console.log(resultData);
 
 function createMap() {
-    
-    let colors = ["#ff6699", "#E96D63", "#7FCA9F", "#F4BA70", "#85C1F5", "#4A789C", "#13A1CB", "#728CB0", "#C296B6", "#c002ef", "#f70e29", "#0e64ef",
-     "#53e9d0", "#E96D63", "#7FCA9F", "#F4BA70", "#85C1F5", "#4A789C", "#13A1CB", "#728CB0", "#C296B6", "#66ff99", "#ff99ff"];
 
     let $divContainer = $("#tab-content");
 
@@ -50,21 +49,50 @@ function createMap() {
             let winnerColor = resultData.ResultsByRegion[provNum].results[1].number;
 
             if (provNum) {
-                e.shape.fill(colors[winnerColor]);
+                e.shape.fill(getPartyColor(winnerColor));
                 
             }
         },
         shapeMouseEnter: function(e) {
         
                 e.shape.stroke("black");
+
+                let popupTemplateString = giveTemlpate();
+                let handelbarsData = resultData.ResultsByRegion[e.shape.dataItem.id]
+
+                let popupTemplate = Handlebars.compile(popupTemplateString) 
+
+                let popupHTML = popupTemplate(handelbarsData)
+
+                //Popup opener
+                var oe = e.originalEvent;
+                var x = oe.pageX || oe.clientX;
+                var y = oe.pageY || oe.clientY;
+
+                var name = e.shape.dataItem.name_bg;
+                popup.element.html(popupHTML);
+                popup.open(x, y);
+                //End popup opener
                 
             },
         shapeMouseLeave: function(e) {
                 
                 e.shape.stroke("white");
-            }
-        
+
+                //Popup closer 
+                if (!$(e.originalEvent.relatedTarget).is(".k-popup, .k-animation-container")) {
+                    popup.close();
+                    popup.element.kendoStop(true, true);
+                }
+                //Popup closer end
+            }        
     });
+
+        //Define popup
+        var popup = $("<div>Foo</div>")
+          .appendTo(document.body)
+          .kendoPopup()
+          .data("kendoPopup");
 }
 
 export { createMap };
