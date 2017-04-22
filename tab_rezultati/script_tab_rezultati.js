@@ -25,13 +25,25 @@
                   value: 32.65,
                   color: "#0000FF"
               }, {
+                  category: "Не подкрепям никого",
+                  value: 2.50,
+                  color: "#FFFFFF"
+              }, {
                   category: "БСП за България",
                   value: 27.20,
                   color: "#FF0000"
               }, {
+                  category: "Да България",
+                  value: 2.88,
+                  color: "#4C9F00"
+              }, {
+                  category: "Нова Република",
+                  value: 2.48,
+                  color: "#808080"
+              }, {
                   category: "Обединени Патриоти",
                   value: 9.07,
-                  color: "#FFD800"
+                  color: "#ffd600"
               }, {
                   category: "ДПС",
                   value: 8.99,
@@ -45,9 +57,9 @@
                   value: 3.06,
                   color: "#4800FF"
               }, {
-                  category: "Не подкрепям никого",
-                  value: 2.50,
-                  color: "#FFFFFF"
+                  category: "Дост",
+                  value: 2.86,
+                  color: "#FF00DC"
               }]
           }],
           tooltip: {
