@@ -1,69 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome to Kendo UI!</title>
 
-            <!-- Load systemJS -->
+    <!-- Load systemJS -->
 
-            <script src="./node_modules/systemjs/dist/system.js"></script>
-            <script src="./system.config.js"></script>
-            
-            <!-- Load CSS -->
-            <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <script src="./node_modules/systemjs/dist/system.js"></script>
+    <script src="./system.config.js"></script>
 
-            <!-- Common Kendo UI CSS for web widgets and widgets for data visualization. -->
-            <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common.min.css" rel="stylesheet" />
+    <!-- Load CSS -->
+    <link rel="stylesheet" type="text/css" href="styles.css" />
 
-            <!-- (Optional) RTL CSS for Kendo UI widgets for the web. Include only in right-to-left applications. -->
-            <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
+    <!-- Common Kendo UI CSS for web widgets and widgets for data visualization. -->
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common.min.css" rel="stylesheet" />
 
-            <!-- Default Kendo UI theme CSS for web widgets and widgets for data visualization. -->
-            <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.default.min.css" rel="stylesheet" />
+    <!-- (Optional) RTL CSS for Kendo UI widgets for the web. Include only in right-to-left applications. -->
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
 
-            <!-- (Optional) Kendo UI Hybrid CSS. Include only if you will use the mobile devices features. -->
-            <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+    <!-- Default Kendo UI theme CSS for web widgets and widgets for data visualization. -->
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.default.min.css" rel="stylesheet" />
 
-            <!-- jQuery JavaScript -->
-            <script src="https://kendo.cdn.telerik.com/2017.1.223/js/jquery.min.js"></script>
+    <!-- (Optional) Kendo UI Hybrid CSS. Include only if you will use the mobile devices features. -->
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
 
-            <!-- Kendo UI combined JavaScript -->
-            <script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
+    <!-- jQuery JavaScript -->
+    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/jquery.min.js"></script>
 
-            <!-- Latest compiled and minified CSS -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Kendo UI combined JavaScript -->
+    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
 
-            
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
 </head>
+
 <body>
-<header>
-    <h1 class="display-1">
-        Парламентарни избори 2017 г.
-    </h1>
-        <nav class="navbar navbar-default" >
+    <header>
+        <h1 class="display-1">
+            Парламентарни избори 2017 г.
+        </h1>
+        <nav class="navbar navbar-default">
             <div class="container center">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="">Избирателна активност</a>
-                </li>
-                <li>
-                    <a href="">Разпределение на процентите за всяка партия</a>
-                </li>
-                <li>
-                    <a href="">Карта на България</a>
-                </li>
-                <li>
-                    <a href="">Избирателна активност</a>
-                </li>
-            </ul>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="">Избирателна активност</a>
+                    </li>
+                    <li>
+                        <a href="">Разпределение на процентите за всяка партия</a>
+                    </li>
+                    <li>
+                        <a href="">Карта на България</a>
+                    </li>
+                    <li>
+                        <a href="">Разпределение на депутатските места</a>
+                    </li>
+                </ul>
             </div>
         </nav>
-</header>
+    </header>
 
     <div id="tab-content"></div>
-    <script>System.import('main');</script>
-    
+    <script>
+        System.import('main');
+    </script>
+
 </body>
+
 </html>
