@@ -5,11 +5,13 @@ import Handlebars from "./../node_modules/handlebars/dist/handlebars.min.js"
 
 let resultData = results();
 
+let $divHolder = $("#tab-holder");
+
 function createMap() {
 
     let $divContainer = $("#tab-content");
 
-    $divContainer.width(650);
+    $divContainer.width(700);
     $divContainer.height(500);
 
     $divContainer.kendoMap({

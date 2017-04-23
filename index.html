@@ -47,16 +47,16 @@
         <nav class="navbar navbar-default">
             <div class="container center">
                 <ul class="nav navbar-nav">
-                    <li>
+                    <li id="activity">
                         <a href="">Избирателна активност</a>
                     </li>
-                    <li>
+                    <li id="results_party">
                         <a href="">Разпределение на процентите за всяка партия</a>
                     </li>
-                    <li>
-                        <a href="">Карта на България</a>
+                    <li id="results_map">
+                        <a href="#/map">Карта на България</a>
                     </li>
-                    <li>
+                    <li id="results_mandates">
                         <a href="">Разпределение на депутатските места</a>
                     </li>
                 </ul>
@@ -64,7 +64,13 @@
         </nav>
     </header>
 
-    <div id="tab-content"></div>
+    <div id="tab-holder">
+        <div id="tab-content">
+
+        </div>
+    </div>
+    
+    
     <script>
         System.import('main');
     </script>
@@ -72,3 +78,4 @@
 </body>
 
 </html>
+
