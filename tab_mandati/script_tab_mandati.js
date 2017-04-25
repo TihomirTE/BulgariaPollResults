@@ -1,34 +1,33 @@
-let mandati = [{
-    "blog": "My blog",
-    "party": "ПП Герб",
-    "value": 95,
-    "userColor": "#0000FF"
-}, {
-    "blog": "My blog",
-    "party": "БСП за България",
-    "value": 80,
-    "userColor": "#FF0000"
-}, {
-    "blog": "My blog",
-    "party": "Обединени Патриоти",
-    "value": 27,
-    "userColor": "#ffd600"
-}, {
-    "blog": "My blog",
-    "party": "ДПС",
-    "value": 26,
-    "userColor": "#B200FF"
-}, {
-    "blog": "My blog",
-    "party": "Воля",
-    "value": 12,
-    "userColor": "#00FFFF"
-}];
+import { getPartyColor } from "./../dependencies/PartyColorPicker.js";
+import { results } from "./../dependencies/results.js";
+
+function generatorData() {
+    let resultsData = results().PartiesResults;
+
+    let arrayData = $.map(resultsData, function(value, index) {
+        return [value];
+    });
+    let finalData = [];
+    for (let i = 0; i < 21; i += 1) {
+        if (arrayData[i].mandads > 0) {
+            let dataObject = {};
+            dataObject.name = arrayData[i].name;
+            dataObject.mandates = arrayData[i].mandads;
+            dataObject.color = getPartyColor(i);
+
+            finalData.push(dataObject);
+        }
+    }
+    //console.log(finalData);
+    return finalData;
+}
+
+console.log(generatorData());
 
 function createChart() {
     $("#tab-content").kendoChart({
         dataSource: {
-            data: mandati
+            data: generatorData()
         },
         title: {
             align: "center",
@@ -45,8 +44,8 @@ function createChart() {
             }
         },
         series: [{
-            field: "value",
-            colorField: "userColor"
+            field: generatorData(i).mandates,
+            colorField: generatorData(i).color
         }],
         valueAxis: {
             max: 100,
@@ -56,7 +55,7 @@ function createChart() {
             visible: false
         },
         categoryAxis: {
-            field: "party",
+            field: generatorData(i).name,
             majorGridLines: {
                 visible: false
             },
