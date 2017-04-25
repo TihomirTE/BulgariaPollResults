@@ -1,7 +1,10 @@
+  import { getPartyColor } from "./../dependencies/PartyColorPicker.js"
+  import { results } from "./../dependencies/results.js"
+  
   let results = [{
       category: "ПП Герб",
       value: 32.65,
-      color: "#0000FF"
+      color: getPartyColor(15)
   }, {
       category: "Не подкрепям никого",
       value: 2.50,
