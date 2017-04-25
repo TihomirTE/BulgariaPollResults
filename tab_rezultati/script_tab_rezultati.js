@@ -43,7 +43,7 @@
 
 
   function pollResults() {
-      $("#chart").kendoChart({
+      $("#tab-content").kendoChart({
           title: {
               position: "top",
               text: "Резултати от парламентарни избори 2017 г."
@@ -73,5 +73,4 @@
       });
   }
 
-  $(document).ready(pollResults);
-  $(document).bind("kendo:skinChange", pollResults);
+  export { pollResults };

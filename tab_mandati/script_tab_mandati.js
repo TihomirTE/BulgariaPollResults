@@ -26,7 +26,7 @@ let mandati = [{
 }];
 
 function createChart() {
-    $("#chart").kendoChart({
+    $("#tab-content").kendoChart({
         dataSource: {
             data: mandati
         },
@@ -67,5 +67,4 @@ function createChart() {
     });
 }
 
-$(document).ready(createChart);
-$(document).bind("kendo:skinChange", createChart);
+export { createChart };
