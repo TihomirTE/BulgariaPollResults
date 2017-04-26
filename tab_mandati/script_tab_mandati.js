@@ -18,16 +18,17 @@ function generatorData() {
             finalData.push(dataObject);
         }
     }
-    //console.log(finalData);
     return finalData;
 }
 
-console.log(generatorData());
+let finalDataResults = generatorData();
+
+console.log(finalDataResults);
 
 function createChart() {
     $("#tab-content").kendoChart({
         dataSource: {
-            data: generatorData()
+            data: finalDataResults[0]
         },
         title: {
             align: "center",
@@ -44,8 +45,8 @@ function createChart() {
             }
         },
         series: [{
-            field: generatorData(i).mandates,
-            colorField: generatorData(i).color
+            field: finalDataResults[0].mandates,
+            colorField: finalDataResults[0].color
         }],
         valueAxis: {
             max: 100,
@@ -55,7 +56,7 @@ function createChart() {
             visible: false
         },
         categoryAxis: {
-            field: generatorData(i).name,
+            field: finalDataResults[0].name,
             majorGridLines: {
                 visible: false
             },
