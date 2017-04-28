@@ -14,7 +14,10 @@
 
 #tab-content {
 
+    position: relative;
     margin: 15px;
-    margin-left: 30%;
+    left: 30%;
+    top: 10%;
+    display: inline-block;
     
 }

@@ -252,16 +252,41 @@ let resultsData = {
         },
     },
     VotingActivity: {
-        10:{activity: 8.44},
-        13:{activity: 25.7},
-        17:{activity: 42.74},
-        Total:{activity: 54.07},
+        10:
+            [{category: "Гласували",
+                value: 8.44,
+                color: "#ffd600"},
+                {category: "Негласували",
+                    value: 91.56,
+                    color: "#696969"}
+                ],
+        13:
+            [{category: "Гласували",
+                value: 25.77,
+                color: "#ffd600"},
+                {category: "Негласували",
+                    value: 74.23,
+                    color: "#696969"}
+            ],
+        17:[{category: "Гласували",
+            value: 42.74,
+            color: "#ffd600"},
+            {category: "Негласували",
+                value: 57.26,
+                color: "#696969"}
+        ],
+        20:[{category: "Гласували",
+            value: 54.07,
+            color: "#ffd600"},
+            {category: "Негласували",
+                value: 45.93,
+                color: "#696969"}
+        ]
     }
-}
+};
     return resultsData;
 }
 
 export { results };
-
 
 
