@@ -11,7 +11,9 @@ function drawActivity() {
 function drawActivityCharts(name, data, divName) {
 
     let div = $("<div></div>")
-        .attr("id", divName);
+        .attr("id", divName)
+        .attr("display", "inline-block")
+        .attr("padding", "0");
         //.attr("display", "inline-block");
     let divId = "#" + divName;
     $("#tab-content").append(div);

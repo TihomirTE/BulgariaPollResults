@@ -21,3 +21,9 @@
     display: inline-block;
     
 }
+
+div div.k-chart{
+    display: inline-block;
+    padding: 0;
+    float: left;
+}
