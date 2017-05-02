@@ -10,10 +10,6 @@ $divContainer.height(500);
 
 let app = $.sammy(function() {
 
-  this.get('', function() {
-    $('#tab-content').text(createChart());
-  });
-
   this.get('#/map', function() {
     $('#tab-content').html(createMap());
   });
@@ -29,6 +25,12 @@ let app = $.sammy(function() {
   this.get('#/activity', function () {
       $('#tab-content').text(drawActivity())
   })
+
+  this.notFound = function() {
+    $('#tab-content').text(createChart());
+  };
+
+
 });
 
 $(function() {
