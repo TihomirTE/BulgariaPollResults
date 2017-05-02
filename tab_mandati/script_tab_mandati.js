@@ -23,8 +23,6 @@ function generatorData() {
 
 let finalDataResults = generatorData();
 
-console.log(finalDataResults)
-
 function createChart() {
     $("#tab-content").kendoChart({
         title: {
