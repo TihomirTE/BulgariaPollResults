@@ -13,7 +13,7 @@ function generatorData() {
             let dataObject = {};
             dataObject.name = arrayData[i].name;
             dataObject.mandates = arrayData[i].mandads;
-            dataObject.color = getPartyColor(i);
+            dataObject.color = getPartyColor(i + 1);
 
             finalData.push(dataObject);
         }
@@ -23,47 +23,23 @@ function generatorData() {
 
 let finalDataResults = generatorData();
 
-console.log(finalDataResults);
-
 function createChart() {
     $("#tab-content").kendoChart({
-        dataSource: {
-            data: finalDataResults[0]
-        },
         title: {
             align: "center",
             text: "Разпределение на мандатите в парламента"
         },
-        legend: {
-            visible: false
-        },
-        seriesDefaults: {
-            type: "column",
-            labels: {
-                visible: true,
-                background: "transparent"
-            }
-        },
-        series: [{
-            field: finalDataResults[0].mandates,
-            colorField: finalDataResults[0].color
-        }],
-        valueAxis: {
-            max: 100,
-            majorGridLines: {
-                visible: false
-            },
-            visible: false
-        },
-        categoryAxis: {
-            field: finalDataResults[0].name,
-            majorGridLines: {
-                visible: false
-            },
-            line: {
-                visible: false
-            }
-        }
+        dataSource: {
+        data: finalDataResults
+    },
+    series: [{
+        field: "mandates",
+        name: "Мандати",
+        color: "color"
+    }],
+    categoryAxis: {
+        field: "name"
+    }
     });
 }
 

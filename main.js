@@ -38,6 +38,12 @@ let app = $.sammy(function() {
     this.get('#/activity', function () {
       $('#tab-content').text(drawActivity());
   })
+
+  this.notFound = function() {
+    $('#tab-content').text(createChart());
+  };
+
+
 });
 
 $(function() {
