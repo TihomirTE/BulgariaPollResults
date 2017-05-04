@@ -10,20 +10,33 @@ $divContainer.height(500);
 
 let app = $.sammy(function() {
 
-  this.get('#/map', function() {
+    this.before('#*', function() {
+        let userId = localStorage['favorite'];
+        if(userId && !sessionStorage['firstVisit']) {
+          sessionStorage['firstVisit'] = true;
+          this.redirect(userId);
+        }
+    });
+
+
+    this.get('/', function () {
+      $('#tab-content').text(drawActivity());
+  });
+
+    this.get('#/map', function() {
     $('#tab-content').html(createMap());
   });
 
-  this.get('#/mandates', function() {
+    this.get('#/mandates', function() {
     $('#tab-content').text(createChart());
   });
 
-  this.get('#/percents', function() {
+    this.get('#/percents', function() {
     $('#tab-content').text(pollResults());
   });
 
-  this.get('#/activity', function () {
-      $('#tab-content').text(drawActivity())
+    this.get('#/activity', function () {
+      $('#tab-content').text(drawActivity());
   })
 });
 

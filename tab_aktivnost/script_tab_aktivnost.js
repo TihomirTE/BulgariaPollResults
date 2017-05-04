@@ -46,3 +46,7 @@ function drawActivityCharts(name, data, divName) {
 }
 
 export { drawActivity }
+
+$("#favorite-button").on("click", () => {
+   localStorage["favorite"] = location.hash;
+});
