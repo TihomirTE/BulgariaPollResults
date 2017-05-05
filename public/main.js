@@ -64,15 +64,30 @@ function showLogin(selector) {
             let userName = $('#tb-username-log').val();
             let passWord = $('#tb-password-log').val();
 
-            console.log(userName);
-            console.log(passWord);
+            firebase.auth().signInWithEmailAndPassword(userName, passWord)
+                .then(() => {
+                    let user = firebase.auth().currentUser;
 
-            firebase.auth().signInWithEmailAndPassword(userName, passWord).catch(function(error) {
+                    if(user.hasOwnProperty('favorite')){
+                        if(user['favorite'] === '#/map'){
+                            $('#tab-content').html(createMap());
+                        } else if(user['favorite'] === '#/mandates') {
+                            $('#tab-content').text(createChart());
+                        }else if(user['favorite'] === '#/percents'){
+                            $('#tab-content').text(pollResults());
+                        } else{
+                            $('#tab-content').text(drawActivity());
+                        }
+                    } else{
+                        $('#tab-content').text(createMap());
+                    }
+                })
+                .catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // ...
-                console.log('im inside');
+                console.log('error with signin');
             });
         })
     });
@@ -86,12 +101,11 @@ function showRegister(selector) {
             let passWord = $('#tb-password-reg').val();
             let passWord2 = $('#tb-password2').val();
 
-            console.log(userName);
-            console.log(passWord);
-
-            firebase.auth().createUserWithEmailAndPassword(userName, passWord).then(() => {
+            firebase.auth().createUserWithEmailAndPassword(userName, passWord)
+                .then(() => {
                 console.log('here');
-                $('#tab-content').html(createMap());
+                $('#tab-content').text(createMap());
+                toastr.success('Zdravej ' + userName);
             })
                 .catch(function(error) {
                 // Handle Errors here.

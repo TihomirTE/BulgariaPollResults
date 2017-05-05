@@ -48,8 +48,13 @@ function drawActivityCharts(name, data, divName) {
 export { drawActivity }
 
 $("#favorite-button").on("click", () => {
-   localStorage["favorite"] = location.hash;
+    let user = firebase.auth().currentUser;
 
-   console.log($('#register-button'));
+    if(user){
+        user['favorite'] = location.hash;
+    } else{
+        localStorage["favorite"] = location.hash;
+    }
+
 });
 
