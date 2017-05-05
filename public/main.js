@@ -2,6 +2,7 @@ import { createMap } from './tab_karta/script_tab_karta.js';
 import { createChart } from './tab_mandati/script_tab_mandati.js'
 import { pollResults } from './tab_rezultati/script_tab_rezultati.js'
 import { drawActivity } from './tab_aktivnost/script_tab_aktivnost.js'
+import { create, PartyResult, ElectionResults, generatorData, createdPollResults } from './tab_create_results/tab_create_result.js'
 
 let $divContainer = $("#tab-content");
 
@@ -36,6 +37,42 @@ let app = $.sammy(function() {
 
     this.get('#/activity', function () {
       $('#tab-content').text(drawActivity());
+  });
+
+  this.get('#/create', function () {
+      
+      let electionResults = new ElectionResults();
+      $('#tab-content').text('');
+      $('#tab-content').text(create());
+
+    let button = $('#submit');
+    let name = $("#partyname");
+    let number = $('#number');
+    let procents = $('#procents');
+    let mandates = $('#mandates');
+
+    button.on("click", function(){
+    
+        let newResult = new PartyResult(name.val(), Number(number.val()), Number(procents.val()), Number(mandates.val()));
+
+        name.val('');
+        number.val('');
+        procents.val('');
+        mandates.val('');
+        
+        electionResults.Add(newResult);
+
+})
+
+    let generateButton = $('#generate');
+
+    generateButton.on("click", function(){
+
+        let results = generatorData(electionResults.GetResults());
+
+        $('#tab-content').text(createdPollResults(results));
+
+    })
   });
 
     //TESTING
