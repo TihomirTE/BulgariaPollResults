@@ -67,7 +67,7 @@ function showLogin(selector) {
             firebase.auth().signInWithEmailAndPassword(userName, passWord)
                 .then(() => {
                     let user = firebase.auth().currentUser;
-
+                    toastr.success('Здравейте ' + userName);
                     if(user.hasOwnProperty('favorite')){
                         if(user['favorite'] === '#/map'){
                             $('#tab-content').html(createMap());
@@ -86,8 +86,7 @@ function showLogin(selector) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                // ...
-                console.log('error with signin');
+                toastr.error('Грешно потребителско име или парола!');
             });
         })
     });
@@ -105,12 +104,12 @@ function showRegister(selector) {
                 .then(() => {
                 console.log('here');
                 $('#tab-content').text(createMap());
-                toastr.success('Zdravej ' + userName);
+                console.log(toastr);
+                toastr.success('Добре дошъл ' + userName);
             })
                 .catch(function(error) {
                 // Handle Errors here.
-                console.log('did not happen');
-                //toastr.error('Cannot register');
+                toastr.error('Моля въведете валиден e-mail и парола поне 6 символа!');
                 var errorCode = error.code;
                 var errorMessage = error.message;
 
