@@ -1,6 +1,7 @@
 import { getPartyColor } from "./../dependencies/PartyColorPicker.js";
 
 function generatorData(results) {
+      
       let resultsData = results;
       let parties = [];
 
@@ -18,6 +19,7 @@ function generatorData(results) {
 }
 
 function createdPollResults(results) {
+      
       $("#tab-content").kendoChart({
           title: {
               position: "top",
@@ -158,32 +160,30 @@ class ElectionResults {
     }
 }
 
-
-
 function create() {
 
-let electionResults = new ElectionResults();
+    let electionResults = new ElectionResults();
 
-let tab = $('#tab-content');
+    let tab = $('#tab-content');
 
-let description = $('<p>').text('Моля попълнете данните за всяка от партиите участвали в изборите, една по една и накрая герерирайте вашата графика');
+    let description = $('<p>').text('Моля попълнете данните за всяка от партиите участвали в изборите, една по една и накрая герерирайте вашата графика');
 
-let partyName = $('<form>').html(`Име на партия:<br>
-  <input type="text" id="partyname" name="partyname"><br>
-  Номер в бюлетината:<br>
-  <input type="text" id="number" name="number"><br>
-  Резултат в проценти:<br>
-  <input type="text" id="procents" name="procents"><br>
-  Спечелени мандати:<br>
-  <input type="text" id="mandates" name="mandates"><br>
-  <br>
-  <input type="button" value="Въведи резултат "id="submit">
-  <br>
-  <br>
-  <input type="button" value="Генерирай графика" id="generate">`);
+    let partyName = $('<form>').html(`Име на партия:<br>
+<input type="text" id="partyname" name="partyname"><br>
+Номер в бюлетината:<br>
+<input type="text" id="number" name="number"><br>
+Резултат в проценти:<br>
+<input type="text" id="procents" name="procents"><br>
+Спечелени мандати:<br>
+<input type="text" id="mandates" name="mandates"><br>
+<br>
+<input type="button" value="Въведи резултат "id="submit">
+<br>
+<br>
+<input type="button" value="Генерирай графика" id="generate">`);
 
  
-tab.append(description).append(partyName);
+    tab.append(description).append(partyName);
  }
 
  export { create, PartyResult, ElectionResults, generatorData, createdPollResults }

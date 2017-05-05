@@ -39,19 +39,19 @@ let app = $.sammy(function() {
       $('#tab-content').text(drawActivity());
   });
 
-  this.get('#/create', function () {
+    this.get('#/create', function () {
       
       let electionResults = new ElectionResults();
       $('#tab-content').text('');
       $('#tab-content').text(create());
 
-    let button = $('#submit');
-    let name = $("#partyname");
-    let number = $('#number');
-    let procents = $('#procents');
-    let mandates = $('#mandates');
+      let button = $('#submit');
+      let name = $("#partyname");
+      let number = $('#number');
+      let procents = $('#procents');
+      let mandates = $('#mandates');
 
-    button.on("click", function(){
+      button.on("click", function(){
     
         let newResult = new PartyResult(name.val(), Number(number.val()), Number(procents.val()), Number(mandates.val()));
 
@@ -61,12 +61,11 @@ let app = $.sammy(function() {
         mandates.val('');
         
         electionResults.Add(newResult);
-
 })
 
-    let generateButton = $('#generate');
+      let generateButton = $('#generate');
 
-    generateButton.on("click", function(){
+      generateButton.on("click", function(){
 
         let results = generatorData(electionResults.GetResults());
 
