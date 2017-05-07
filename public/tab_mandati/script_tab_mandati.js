@@ -1,17 +1,18 @@
 import { getPartyColor } from "./../dependencies/PartyColorPicker.js";
 import { results } from "./../dependencies/results.js";
 
-function generatorData() {
+function generatorDataMandates() {
+    const numberOfParties = 21;
     let resultsData = results().PartiesResults;
 
     let arrayData = $.map(resultsData, function(value, index) {
         return [value];
     });
     let finalData = [];
-    for (let i = 0; i < 21; i += 1) {
+    for (let i = 0; i < numberOfParties; i += 1) {
         if (arrayData[i].mandads > 0) {
             let dataObject = {};
-            dataObject.name = arrayData[i].name;
+            dataObject.name = arrayData[i].abbreviationName;
             dataObject.mandates = arrayData[i].mandads;
             dataObject.color = getPartyColor(i + 1);
 
@@ -21,7 +22,7 @@ function generatorData() {
     return finalData;
 }
 
-let finalDataResults = generatorData();
+let finalDataResults = generatorDataMandates();
 
 function createChart() {
     $("#tab-content").kendoChart({
@@ -30,17 +31,18 @@ function createChart() {
             text: "Разпределение на мандатите в парламента"
         },
         dataSource: {
-        data: finalDataResults
-    },
-    series: [{
-        field: "mandates",
-        name: "Мандати",
-        color: "color"
-    }],
-    categoryAxis: {
-        field: "name"
-    }
+            data: finalDataResults
+        },
+        series: [{
+            field: "mandates",
+            name: "Мандати",
+            color: "color"
+        }],
+        categoryAxis: {
+            field: "name"
+        }
     });
 }
 
 export { createChart };
+export { generatorDataMandates };
