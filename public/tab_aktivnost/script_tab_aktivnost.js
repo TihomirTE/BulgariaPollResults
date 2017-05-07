@@ -52,6 +52,7 @@ $("#favorite-button").on("click", () => {
 
     if(user){
         user['favorite'] = location.hash;
+
     } else{
         localStorage["favorite"] = location.hash;
     }

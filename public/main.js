@@ -67,6 +67,8 @@ function showLogin(selector) {
             firebase.auth().signInWithEmailAndPassword(userName, passWord)
                 .then(() => {
                     let user = firebase.auth().currentUser;
+                    console.log(user);
+                    console.log(user['favorite']);
                     toastr.success('Здравейте ' + userName);
                     if(user.hasOwnProperty('favorite')){
                         if(user['favorite'] === '#/map'){
@@ -100,6 +102,11 @@ function showRegister(selector) {
             let passWord = $('#tb-password-reg').val();
             let passWord2 = $('#tb-password2').val();
 
+            if(passWord !== passWord2){
+                toastr.error('Паролите трябва да бъдат еднакви!');
+                return;
+            }
+
             firebase.auth().createUserWithEmailAndPassword(userName, passWord)
                 .then(() => {
                 console.log('here');
@@ -110,10 +117,9 @@ function showRegister(selector) {
                 .catch(function(error) {
                 // Handle Errors here.
                 toastr.error('Моля въведете валиден e-mail и парола поне 6 символа!');
-                var errorCode = error.code;
-                var errorMessage = error.message;
+                let errorCode = error.code;
+                let errorMessage = error.message;
 
-                // ...
             });
         });
     })
