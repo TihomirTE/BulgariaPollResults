@@ -61,7 +61,7 @@ let app = $.sammy(function() {
         mandates.val('');
         
         electionResults.Add(newResult);
-})
+});
 
       let generateButton = $('#generate');
 
@@ -76,7 +76,19 @@ let app = $.sammy(function() {
 
     //TESTING
     this.get ('#/login', function () {
-        showLogin('#tab-content');
+        if($('#login-anch').text() === 'Вход'){
+            showLogin('#tab-content');
+        }else{
+            firebase.auth().signOut()
+                .then(function() {
+                    $('#login-anch').text('Вход');
+                    showLogin('#tab-content');
+                    toastr.success('Излязохте от системата успешно!');
+            })
+                .catch(function (error) {
+                    toastr.error('Възника грешка, моля опитайте отново!');
+                })
+        }
     });
 
     this.get('#/register', function () {
@@ -102,29 +114,29 @@ function showLogin(selector) {
 
             firebase.auth().signInWithEmailAndPassword(userName, passWord)
                 .then(() => {
+                    $('#login-anch').text('Изход');
                     let user = firebase.auth().currentUser;
-                    console.log(user);
-                    console.log(user['favorite']);
+
                     toastr.success('Здравейте ' + userName);
                     if(user.hasOwnProperty('favorite')){
                         if(user['favorite'] === '#/map'){
-                            $('#tab-content').html(createMap());
+                            location.hash = '#/map';
                         } else if(user['favorite'] === '#/mandates') {
-                            $('#tab-content').text(createChart());
+                            location.hash = '#/mandates';
                         }else if(user['favorite'] === '#/percents'){
-                            $('#tab-content').text(pollResults());
-                        } else{
-                            $('#tab-content').text(drawActivity());
+                            location.hash = '#/percents';
+                        } else if(user['favorite'] === '#/create'){
+                            location.hash = '#/create';
+                        }
+                        else{
+                            location.hash = '#/activity';
                         }
                     } else{
-                        $('#tab-content').text(createMap());
+                        location.hash = '#/map';
                     }
                 })
                 .catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                toastr.error('Грешно потребителско име или парола!');
+                    toastr.error('Грешно потребителско име или парола!');
             });
         })
     });
@@ -145,17 +157,12 @@ function showRegister(selector) {
 
             firebase.auth().createUserWithEmailAndPassword(userName, passWord)
                 .then(() => {
-                console.log('here');
-                $('#tab-content').text(createMap());
-                console.log(toastr);
-                toastr.success('Добре дошъл ' + userName);
+                    $('#login-anch').text('Изход');
+                    location.hash = '#/map';
+                    toastr.success('Успешно се регистрирахте в системата ' + userName + '!');
             })
                 .catch(function(error) {
-                // Handle Errors here.
-                toastr.error('Моля въведете валиден e-mail и парола поне 6 символа!');
-                let errorCode = error.code;
-                let errorMessage = error.message;
-
+                    toastr.error('Моля въведете валиден e-mail и парола поне 6 символа!');
             });
         });
     })
