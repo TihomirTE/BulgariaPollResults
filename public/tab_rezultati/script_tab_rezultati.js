@@ -2,10 +2,11 @@
   import { results } from "./../dependencies/results.js";
 
   function generatorData() {
+      const numberOfParties = 21;
       let resultsData = results();
       let parties = [];
 
-      for (let i = 1; i <= 21; i += 1) {
+      for (let i = 1; i <= numberOfParties; i += 1) {
           if (resultsData.PartiesResults[i].result >= 2) {
               let data = {};
               data.category = resultsData.PartiesResults[i].name;
@@ -50,3 +51,4 @@
   }
 
   export { pollResults };
+  export { generatorData };
