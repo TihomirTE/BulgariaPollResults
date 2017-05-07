@@ -4,7 +4,7 @@
     "description": "Telerik Software Academy student's project visualizing the results from Bulgarian parlament elections in 2017\r \"# BulgariaPollResults\"",
     "main": "script.js",
     "scripts": {
-        "test": "mocha --compilers js:babel-core/register"
+        "test": "mocha --require ./test/testHelper.js"
     },
     "repository": {
         "type": "git",
@@ -21,6 +21,7 @@
         "babel-polyfill": "^6.23.0",
         "bootstrap": "^3.3.7",
         "handlebars": "^4.0.6",
+        "jquery": "^3.2.1",
         "sammy": "^0.7.6",
         "systemjs": "^0.20.12",
         "systemjs-plugin-babel": "0.0.21",
@@ -31,6 +32,8 @@
         "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
         "babel-preset-es2015": "^6.24.1",
         "chai": "^3.5.0",
+        "jsdom": "10.1.0",
+        "jsdom-global": "2.1.1",
         "mocha": "^3.3.0",
         "sinon": "^2.2.0",
         "sinon-chai": "^2.10.0"
