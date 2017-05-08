@@ -1,58 +1,58 @@
 import { getPartyColor } from "./../dependencies/PartyColorPicker.js";
 
 function generatorData(results) {
-      
-      let resultsData = results;
-      let parties = [];
 
-      for (let i = 1; i <= Object.keys(resultsData).length; i += 1) {
-          if (resultsData[i].result >= 2) {
-              let data = {};
-              data.category = resultsData[i].name;
-              data.value = resultsData[i].result;
-              data.color = getPartyColor(i);
+    let resultsData = results;
+    let parties = [];
 
-              parties.push(data);
-          }
-      }
-      return parties;
+    for (let i = 1; i <= Object.keys(resultsData).length; i += 1) {
+        if (resultsData[i].result >= 2) {
+            let data = {};
+            data.category = resultsData[i].name;
+            data.value = resultsData[i].result;
+            data.color = getPartyColor(i);
+
+            parties.push(data);
+        }
+    }
+    return parties;
 }
 
 function createdPollResults(results) {
-      
-      $("#tab-content").kendoChart({
-          title: {
-              position: "top",
-              text: "Резултати от парламентарни избори 2017 г."
-          },
-          legend: {
-              visible: false
-          },
-          chartArea: {
-              background: ""
-          },
-          seriesDefaults: {
-              labels: {
-                  visible: true,
-                  background: "transparent",
-                  template: "#= category #: \n #= value#%"
-              }
-          },
-          series: [{
-              type: "pie",
-              startAngle: 150,
-              data: results
-          }],
-          tooltip: {
-              visible: true,
-              format: "{0}%"
-          }
-      });
+
+    $("#tab-content").kendoChart({
+        title: {
+            position: "top",
+            text: "Резултати от парламентарни избори 2017 г."
+        },
+        legend: {
+            visible: false
+        },
+        chartArea: {
+            background: ""
+        },
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                background: "transparent",
+                template: "#= category #: \n #= value#%"
+            }
+        },
+        series: [{
+            type: "pie",
+            startAngle: 150,
+            data: results
+        }],
+        tooltip: {
+            visible: true,
+            format: "{0}%"
+        }
+    });
 }
 
 class PartyResult {
 
-    constructor (nameOfParty, numberInBulletin, resultInPercents, mandatsWon) {
+    constructor(nameOfParty, numberInBulletin, resultInPercents, mandatsWon) {
 
         this.Name = nameOfParty;
         this.NumberInBulletin = numberInBulletin;
@@ -144,7 +144,7 @@ class ElectionResults {
 
         if (partyResult instanceof PartyResult === false) {
 
-            throw new Error('Result passed is not valid!')
+            throw new Error('Result passed is not valid!');
         }
 
         this._electionResults[partyResult.NumberInBulletin] = {};
@@ -182,8 +182,8 @@ function create() {
 <br>
 <input type="button" value="Генерирай графика" id="generate">`);
 
- 
-    tab.append(description).append(partyName);
- }
 
- export { create, PartyResult, ElectionResults, generatorData, createdPollResults }
+    tab.append(description).append(partyName);
+}
+
+export { create, PartyResult, ElectionResults, generatorData, createdPollResults }

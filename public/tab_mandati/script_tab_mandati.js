@@ -5,9 +5,9 @@ function generatorDataMandates() {
     const numberOfParties = 21;
     let resultsData = results().PartiesResults;
 
-    let arrayData = $.map(resultsData, function(value, index) {
-        return [value];
-    });
+    // Convert object to array
+    let arrayData = Object.keys(resultsData).map(key => resultsData[key]);
+
     let finalData = [];
     for (let i = 0; i < numberOfParties; i += 1) {
         if (arrayData[i].mandads > 0) {
