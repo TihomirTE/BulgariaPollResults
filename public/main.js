@@ -3,8 +3,9 @@ import { createChart } from './tab_mandati/script_tab_mandati.js'
 import { pollResults } from './tab_rezultati/script_tab_rezultati.js'
 import { drawActivity } from './tab_aktivnost/script_tab_aktivnost.js'
 import { create, PartyResult, ElectionResults, generatorData, createdPollResults } from './tab_create_results/tab_create_result.js'
+import { showLogin, showRegister } from 'js/user-controller.js'
 
-let $divContainer = $("#tab-content");
+let $divContainer = $('#tab-content');
 
 $divContainer.width(700);
 $divContainer.height(500);
@@ -12,151 +13,93 @@ $divContainer.height(500);
 let app = $.sammy(function() {
 
     this.before('#*', function() {
-        let userId = localStorage['favorite'];
-        if (userId && !sessionStorage['firstVisit']) {
-            sessionStorage['firstVisit'] = true;
-            this.redirect(userId);
+        let fav = localStorage['favorite'];
+        if(fav && !sessionStorage['firstVisit']) {
+          sessionStorage['firstVisit'] = true;
+          this.redirect(fav);
         }
     });
 
-    this.get('/', function() {
-        $('#tab-content').text(drawActivity());
-    });
+    this.get('/', function () {
+      $('#tab-content').text(drawActivity());
+  });
 
     this.get('#/map', function() {
-        $('#tab-content').html(createMap());
-    });
+    $('#tab-content').html(createMap());
+  });
 
     this.get('#/mandates', function() {
-        $('#tab-content').text(createChart());
-    });
+    $('#tab-content').text(createChart());
+  });
 
     this.get('#/percents', function() {
-        $('#tab-content').text(pollResults());
-    });
+    $('#tab-content').text(pollResults());
+  });
 
-    this.get('#/activity', function() {
-        $('#tab-content').text(drawActivity());
-    });
+    this.get('#/activity', function () {
+      $('#tab-content').text(drawActivity());
+  });
 
-    this.get('#/create', function() {
+    this.get('#/create', function () {
+      
+      let electionResults = new ElectionResults();
+      $('#tab-content').text('');
+      $('#tab-content').text(create());
 
-        let electionResults = new ElectionResults();
-        $('#tab-content').text('');
-        $('#tab-content').text(create());
+      let button = $('#submit');
+      let name = $("#partyname");
+      let number = $('#number');
+      let procents = $('#procents');
+      let mandates = $('#mandates');
 
-        let button = $('#submit');
-        let name = $("#partyname");
-        let number = $('#number');
-        let procents = $('#procents');
-        let mandates = $('#mandates');
+      button.on("click", function(){
+    
+        let newResult = new PartyResult(name.val(), Number(number.val()), Number(procents.val()), Number(mandates.val()));
 
-        button.on("click", function() {
-
-            let newResult = new PartyResult(name.val(), Number(number.val()), Number(procents.val()), Number(mandates.val()));
-
-            name.val('');
-            number.val('');
-            procents.val('');
-            mandates.val('');
-
-            electionResults.Add(newResult);
-        })
-
-        let generateButton = $('#generate');
-
-        generateButton.on("click", function() {
-
-            let results = generatorData(electionResults.GetResults());
-
-            $('#tab-content').text(createdPollResults(results));
-
-        })
-    });
-
-    //TESTING
-    this.get('#/login', function() {
-        showLogin('#tab-content');
-    });
-
-    this.get('#/register', function() {
-        showRegister('#tab-content');
-
-        $('#register-button').on('click', () => {
-            console.log('test');
-        });
-    });
-
-    this.notFound = function() {
-        $('#tab-content').text(createChart());
-    };
+        name.val('');
+        number.val('');
+        procents.val('');
+        mandates.val('');
+        
+        electionResults.Add(newResult);
 });
 
-//TODO MOVE IN CONTROLLER??
-function showLogin(selector) {
-    $.get('templates/login.html', function(templ) {
-        $(selector).html(templ);
-        $('#login-button').on('click', () => {
-            let userName = $('#tb-username-log').val();
-            let passWord = $('#tb-password-log').val();
+      let generateButton = $('#generate');
 
-            firebase.auth().signInWithEmailAndPassword(userName, passWord)
-                .then(() => {
-                    let user = firebase.auth().currentUser;
-                    toastr.success('Здравейте ' + userName);
-                    if (user.hasOwnProperty('favorite')) {
-                        if (user['favorite'] === '#/map') {
-                            $('#tab-content').html(createMap());
-                        } else if (user['favorite'] === '#/mandates') {
-                            $('#tab-content').text(createChart());
-                        } else if (user['favorite'] === '#/percents') {
-                            $('#tab-content').text(pollResults());
-                        } else {
-                            $('#tab-content').text(drawActivity());
-                        }
-                    } else {
-                        $('#tab-content').text(createMap());
-                    }
-                })
-                .catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    toastr.error('Грешно потребителско име или парола!');
-                });
-        })
-    });
-}
+      generateButton.on("click", function(){
 
-function showRegister(selector) {
-    $.get('templates/register.html', function(tmpl) {
-        $(selector).html(tmpl);
-        $('#register-button').on('click', () => {
-            let userName = $('#tb-username-reg').val();
-            let passWord = $('#tb-password-reg').val();
-            let passWord2 = $('#tb-password2').val();
+        let results = generatorData(electionResults.GetResults());
 
-            firebase.auth().createUserWithEmailAndPassword(userName, passWord)
-                .then(() => {
-                    console.log('here');
-                    $('#tab-content').text(createMap());
-                    console.log(toastr);
-                    toastr.success('Добре дошъл ' + userName);
-                })
-                .catch(function(error) {
-                    // Handle Errors here.
-                    toastr.error('Моля въведете валиден e-mail и парола поне 6 символа!');
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
+        $('#tab-content').text(createdPollResults(results));
 
-                    // ...
-                });
-        });
     })
-}
+  });
 
-//end of TODO
+    this.get ('#/login', function () {
+        if($('#login-anch').text() === 'Вход'){
+            showLogin('#tab-content');
+        }else{
+            firebase.auth().signOut()
+                .then(function() {
+                    $('#login-anch').text('Вход');
+                    showLogin('#tab-content');
+                    toastr.success('Излязохте от системата успешно!');
+            })
+                .catch(function (error) {
+                    toastr.error('Възника грешка, моля опитайте отново!');
+                })
+        }
+    });
+
+    this.get('#/register', function () {
+        showRegister('#tab-content');
+    });
+
+  this.notFound = function() {
+    $('#tab-content').text(createChart());
+  };
+});
 
 $(function() {
-    app.run();
+  app.run();
 });

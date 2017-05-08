@@ -14,7 +14,7 @@ function drawActivityCharts(name, data, divName) {
         .attr("id", divName)
         .attr("display", "inline-block")
         .attr("padding", "0");
-    //.attr("display", "inline-block");
+        //.attr("display", "inline-block");
     let divId = "#" + divName;
     $("#tab-content").append(div);
 
@@ -34,9 +34,10 @@ function drawActivityCharts(name, data, divName) {
             startAngle: 90
         },
         series: [{
-            name: name,
-            data: data,
-        }],
+                name: name,
+                data: data,
+            }
+        ],
         tooltip: {
             visible: true,
             template: "#= category # (#= series.name #): #= value #%"
@@ -44,16 +45,6 @@ function drawActivityCharts(name, data, divName) {
     });
 }
 
-
-$("#favorite-button").on("click", () => {
-    let user = firebase.auth().currentUser;
-
-    if (user) {
-        user['favorite'] = location.hash;
-    } else {
-        localStorage["favorite"] = location.hash;
-    }
-
-});
-
 export { drawActivity }
+
+
