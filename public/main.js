@@ -3,8 +3,9 @@ import { createChart } from './tab_mandati/script_tab_mandati.js'
 import { pollResults } from './tab_rezultati/script_tab_rezultati.js'
 import { drawActivity } from './tab_aktivnost/script_tab_aktivnost.js'
 import { create, PartyResult, ElectionResults, generatorData, createdPollResults } from './tab_create_results/tab_create_result.js'
+import { showLogin, showRegister } from 'js/user-controller.js'
 
-let $divContainer = $("#tab-content");
+let $divContainer = $('#tab-content');
 
 $divContainer.width(700);
 $divContainer.height(500);
@@ -12,10 +13,10 @@ $divContainer.height(500);
 let app = $.sammy(function() {
 
     this.before('#*', function() {
-        let userId = localStorage['favorite'];
-        if(userId && !sessionStorage['firstVisit']) {
+        let fav = localStorage['favorite'];
+        if(fav && !sessionStorage['firstVisit']) {
           sessionStorage['firstVisit'] = true;
-          this.redirect(userId);
+          this.redirect(fav);
         }
     });
 
@@ -74,7 +75,6 @@ let app = $.sammy(function() {
     })
   });
 
-    //TESTING
     this.get ('#/login', function () {
         if($('#login-anch').text() === 'Вход'){
             showLogin('#tab-content');
@@ -93,82 +93,12 @@ let app = $.sammy(function() {
 
     this.get('#/register', function () {
         showRegister('#tab-content');
-
-        $('#register-button').on('click', () => {
-            console.log('test');
-        });
     });
 
   this.notFound = function() {
     $('#tab-content').text(createChart());
   };
 });
-
-//TODO MOVE IN CONTROLLER??
-function showLogin(selector) {
-    $.get('templates/login.html', function(templ) {
-        $(selector).html(templ);
-        $('#login-button').on('click', () => {
-            let userName = $('#tb-username-log').val();
-            let passWord = $('#tb-password-log').val();
-
-            firebase.auth().signInWithEmailAndPassword(userName, passWord)
-                .then(() => {
-                    $('#login-anch').text('Изход');
-                    let user = firebase.auth().currentUser;
-
-                    toastr.success('Здравейте ' + userName);
-                    if(user.hasOwnProperty('favorite')){
-                        if(user['favorite'] === '#/map'){
-                            location.hash = '#/map';
-                        } else if(user['favorite'] === '#/mandates') {
-                            location.hash = '#/mandates';
-                        }else if(user['favorite'] === '#/percents'){
-                            location.hash = '#/percents';
-                        } else if(user['favorite'] === '#/create'){
-                            location.hash = '#/create';
-                        }
-                        else{
-                            location.hash = '#/activity';
-                        }
-                    } else{
-                        location.hash = '#/map';
-                    }
-                })
-                .catch(function(error) {
-                    toastr.error('Грешно потребителско име или парола!');
-            });
-        })
-    });
-}
-
-function showRegister(selector) {
-    $.get('templates/register.html', function (tmpl) {
-        $(selector).html(tmpl);
-        $('#register-button').on('click', () => {
-            let userName = $('#tb-username-reg').val();
-            let passWord = $('#tb-password-reg').val();
-            let passWord2 = $('#tb-password2').val();
-
-            if(passWord !== passWord2){
-                toastr.error('Паролите трябва да бъдат еднакви!');
-                return;
-            }
-
-            firebase.auth().createUserWithEmailAndPassword(userName, passWord)
-                .then(() => {
-                    $('#login-anch').text('Изход');
-                    location.hash = '#/map';
-                    toastr.success('Успешно се регистрирахте в системата ' + userName + '!');
-            })
-                .catch(function(error) {
-                    toastr.error('Моля въведете валиден e-mail и парола поне 6 символа!');
-            });
-        });
-    })
-}
-
-//end of TODO
 
 $(function() {
   app.run();
