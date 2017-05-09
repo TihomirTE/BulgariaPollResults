@@ -7,10 +7,10 @@ $('#favorite-button').on('click', () => {
         favorite: location.hash,
     });
 
-    if(user){
+    if (user) {
         user['favorite'] = location.hash;
 
-    } else{
+    } else {
         localStorage['favorite'] = location.hash;
     }
 });
@@ -29,26 +29,26 @@ function showLogin(selector) {
                     let uid = firebase.auth().currentUser.uid;
                     let userRef = firebase.database().ref('users/' + uid);
 
-                    userRef.on('value', function (snapshot) {
+                    userRef.on('value', function(snapshot) {
                         location.hash = snapshot.val()['favorite'];
                     });
                 })
                 .catch(function(error) {
                     toastr.error('Грешно потребителско име или парола!');
                 });
-        })
+        });
     });
 }
 
 function showRegister(selector) {
-    $.get('templates/register.html', function (tmpl) {
+    $.get('templates/register.html', function(tmpl) {
         $(selector).html(tmpl);
         $('#register-button').on('click', () => {
             let userName = $('#tb-username-reg').val();
             let passWord = $('#tb-password-reg').val();
             let passWord2 = $('#tb-password2').val();
 
-            if(passWord !== passWord2){
+            if (passWord !== passWord2) {
                 toastr.error('Паролите трябва да бъдат еднакви!');
                 return;
             }
@@ -63,14 +63,14 @@ function showRegister(selector) {
                     firebase.database().ref('users/' + userId).set({
                         userId: userId,
                         favorite: '#/map',
-                    })
+                    });
 
                 })
                 .catch(function(error) {
                     toastr.error('Моля въведете валиден e-mail и парола поне 6 символа!');
                 });
         });
-    })
+    });
 }
 
-export { showLogin, showRegister }
+export { showLogin, showRegister };

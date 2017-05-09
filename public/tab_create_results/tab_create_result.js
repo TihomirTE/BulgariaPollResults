@@ -186,4 +186,4 @@ function create() {
     tab.append(description).append(partyName);
 }
 
-export { create, PartyResult, ElectionResults, generatorData, createdPollResults }
+export { create, PartyResult, ElectionResults, generatorData, createdPollResults };

@@ -112,6 +112,8 @@ describe('Tests', function() {
             it("Function Add() throw exception if parameter is not PartyResult instance", () => {
                 expect(() => result.Add("sth")).to.throw();
             });
+
+
         });
     });
 });

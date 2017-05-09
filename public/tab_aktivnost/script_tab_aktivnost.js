@@ -1,4 +1,4 @@
-import { results } from "./../dependencies/results.js"
+import { results } from "./../dependencies/results.js";
 
 function drawActivity() {
     $("#tab-content").html("");
@@ -14,7 +14,7 @@ function drawActivityCharts(name, data, divName) {
         .attr("id", divName)
         .attr("display", "inline-block")
         .attr("padding", "0");
-        //.attr("display", "inline-block");
+    //.attr("display", "inline-block");
     let divId = "#" + divName;
     $("#tab-content").append(div);
 
@@ -34,10 +34,9 @@ function drawActivityCharts(name, data, divName) {
             startAngle: 90
         },
         series: [{
-                name: name,
-                data: data,
-            }
-        ],
+            name: name,
+            data: data,
+        }],
         tooltip: {
             visible: true,
             template: "#= category # (#= series.name #): #= value #%"
@@ -45,6 +44,4 @@ function drawActivityCharts(name, data, divName) {
     });
 }
 
-export { drawActivity }
-
-
+export { drawActivity };

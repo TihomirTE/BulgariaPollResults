@@ -1,9 +1,9 @@
 import { createMap } from './tab_karta/script_tab_karta.js';
-import { createChart } from './tab_mandati/script_tab_mandati.js'
-import { pollResults } from './tab_rezultati/script_tab_rezultati.js'
-import { drawActivity } from './tab_aktivnost/script_tab_aktivnost.js'
-import { create, PartyResult, ElectionResults, generatorData, createdPollResults } from './tab_create_results/tab_create_result.js'
-import { showLogin, showRegister } from 'js/user-controller.js'
+import { createChart } from './tab_mandati/script_tab_mandati.js';
+import { pollResults } from './tab_rezultati/script_tab_rezultati.js';
+import { drawActivity } from './tab_aktivnost/script_tab_aktivnost.js';
+import { create, PartyResult, ElectionResults, generatorData, createdPollResults } from './tab_create_results/tab_create_result.js';
+import { showLogin, showRegister } from 'js/user-controller.js';
 
 let $divContainer = $('#tab-content');
 
@@ -14,92 +14,92 @@ let app = $.sammy(function() {
 
     this.before('#*', function() {
         let fav = localStorage['favorite'];
-        if(fav && !sessionStorage['firstVisit']) {
-          sessionStorage['firstVisit'] = true;
-          this.redirect(fav);
+        if (fav && !sessionStorage['firstVisit']) {
+            sessionStorage['firstVisit'] = true;
+            this.redirect(fav);
         }
     });
 
-    this.get('/', function () {
-      $('#tab-content').text(drawActivity());
-  });
+    this.get('/', function() {
+        $('#tab-content').text(drawActivity());
+    });
 
     this.get('#/map', function() {
-    $('#tab-content').html(createMap());
-  });
+        $('#tab-content').html(createMap());
+    });
 
     this.get('#/mandates', function() {
-    $('#tab-content').text(createChart());
-  });
+        $('#tab-content').text(createChart());
+    });
 
     this.get('#/percents', function() {
-    $('#tab-content').text(pollResults());
-  });
+        $('#tab-content').text(pollResults());
+    });
 
-    this.get('#/activity', function () {
-      $('#tab-content').text(drawActivity());
-  });
+    this.get('#/activity', function() {
+        $('#tab-content').text(drawActivity());
+    });
 
-    this.get('#/create', function () {
-      
-      let electionResults = new ElectionResults();
-      $('#tab-content').text('');
-      $('#tab-content').text(create());
+    this.get('#/create', function() {
 
-      let button = $('#submit');
-      let name = $("#partyname");
-      let number = $('#number');
-      let procents = $('#procents');
-      let mandates = $('#mandates');
+        let electionResults = new ElectionResults();
+        $('#tab-content').text('');
+        $('#tab-content').text(create());
 
-      button.on("click", function(){
-    
-        let newResult = new PartyResult(name.val(), Number(number.val()), Number(procents.val()), Number(mandates.val()));
+        let button = $('#submit');
+        let name = $("#partyname");
+        let number = $('#number');
+        let procents = $('#procents');
+        let mandates = $('#mandates');
 
-        name.val('');
-        number.val('');
-        procents.val('');
-        mandates.val('');
-        
-        electionResults.Add(newResult);
-});
+        button.on("click", function() {
 
-      let generateButton = $('#generate');
+            let newResult = new PartyResult(name.val(), Number(number.val()), Number(procents.val()), Number(mandates.val()));
 
-      generateButton.on("click", function(){
+            name.val('');
+            number.val('');
+            procents.val('');
+            mandates.val('');
 
-        let results = generatorData(electionResults.GetResults());
+            electionResults.Add(newResult);
+        });
 
-        $('#tab-content').text(createdPollResults(results));
+        let generateButton = $('#generate');
 
-    })
-  });
+        generateButton.on("click", function() {
 
-    this.get ('#/login', function () {
-        if($('#login-anch').text() === 'Вход'){
+            let results = generatorData(electionResults.GetResults());
+
+            $('#tab-content').text(createdPollResults(results));
+
+        });
+    });
+
+    this.get('#/login', function() {
+        if ($('#login-anch').text() === 'Вход') {
             showLogin('#tab-content');
-        }else{
+        } else {
             firebase.auth().signOut()
                 .then(function() {
                     $('#login-anch').text('Вход');
                     showLogin('#tab-content');
                     toastr.success('Излязохте от системата успешно!');
-            })
-                .catch(function (error) {
-                    toastr.error('Възника грешка, моля опитайте отново!');
                 })
+                .catch(function(error) {
+                    toastr.error('Възника грешка, моля опитайте отново!');
+                });
         }
     });
 
-    this.get('#/register', function () {
+    this.get('#/register', function() {
         showRegister('#tab-content');
     });
 
-  this.notFound = function() {
-    $('#tab-content').text(createChart());
-  };
+    this.notFound = function() {
+        $('#tab-content').text(createChart());
+    };
 });
 
 $(function() {
-  app.run();
+    app.run();
 });
