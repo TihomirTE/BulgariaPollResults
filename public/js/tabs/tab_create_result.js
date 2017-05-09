@@ -1,4 +1,4 @@
-import { getPartyColor } from "./../dependencies/PartyColorPicker.js";
+import { getPartyColor } from "../../dependencies/PartyColorPicker.js";
 
 function generatorData(results) {
 

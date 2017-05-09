@@ -1,7 +1,7 @@
-import { results } from "./../dependencies/results.js";
-import { getPartyColor } from "./../dependencies/PartyColorPicker.js";
+import { results } from "../../dependencies/results.js";
+import { getPartyColor } from "../../dependencies/PartyColorPicker.js";
 import { giveTemlpate } from "./buble.js"
-import Handlebars from "./../node_modules/handlebars/dist/handlebars.min.js"
+import Handlebars from "../../node_modules/handlebars/dist/handlebars.min.js"
 
 let resultData = results();
 

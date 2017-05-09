@@ -1,5 +1,5 @@
-import { getPartyColor } from "./../dependencies/PartyColorPicker.js";
-import { results } from "./../dependencies/results.js";
+import { getPartyColor } from "../../dependencies/PartyColorPicker.js";
+import { results } from "../../dependencies/results.js";
 
 function generatorDataMandates() {
     const numberOfParties = 21;
