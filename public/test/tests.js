@@ -17,14 +17,14 @@ let $ = jQuery;
 let tabsResults = require(path.join(__dirname, '..', 'tab_rezultati/script_tab_rezultati'));
 let mandates = require(path.join(__dirname, '..', 'tab_mandati/script_tab_mandati'));
 let customResults = require(path.join(__dirname, '..', 'tab_create_results/tab_create_result'));
-
+let partyColor = require(path.join(__dirname, '..', 'dependencies/PartyColorPicker'));
 
 // Tests
 describe('Tests', function() {
     describe('Tests Results from the poll', () => {
         let generatorData = tabsResults.generatorData;
 
-        it("Function generator Data should return array", () => {
+        it("Function generatorData should return array", () => {
             expect(generatorData()).to.be.instanceof(Array);
         });
         it("Show parties above 2%", () => {
@@ -112,8 +112,16 @@ describe('Tests', function() {
             it("Function Add() throw exception if parameter is not PartyResult instance", () => {
                 expect(() => result.Add("sth")).to.throw();
             });
+        });
+    });
 
-
+    describe("Tests PartyColorPicker", () => {
+        it("Parameter of function getPartyColor must be a number", () => {
+            expect(() => partyColor("not a number")).to.throw();
+        });
+        it("Parameter of function getPartyColor must be a number between 0 and 21", () => {
+            expect(() => partyColor(0)).to.throw();
+            expect(() => partyColor(21)).to.throw();
         });
     });
 });
