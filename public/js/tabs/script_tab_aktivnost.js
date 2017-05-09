@@ -1,4 +1,4 @@
-import { results } from "./../dependencies/results.js";
+import { results } from "../../dependencies/results.js";
 
 function drawActivity() {
     $("#tab-content").html("");

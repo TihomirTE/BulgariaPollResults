@@ -14,9 +14,9 @@ function jQuery(doc) {
 let $ = jQuery;
 
 // Import the desired files to be tested
-let tabsResults = require(path.join(__dirname, '..', 'tab_rezultati/script_tab_rezultati'));
-let mandates = require(path.join(__dirname, '..', 'tab_mandati/script_tab_mandati'));
-let customResults = require(path.join(__dirname, '..', 'tab_create_results/tab_create_result'));
+let tabsResults = require(path.join(__dirname, '..', 'js/tabs/script_tab_rezultati'));
+let mandates = require(path.join(__dirname, '..', 'js/tabs/script_tab_mandati'));
+let customResults = require(path.join(__dirname, '..', 'js/tabs/tab_create_result'));
 let partyColor = require(path.join(__dirname, '..', 'dependencies/PartyColorPicker'));
 
 // Tests

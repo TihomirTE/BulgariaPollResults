@@ -1,8 +1,8 @@
-import { createMap } from './tab_karta/script_tab_karta.js';
-import { createChart } from './tab_mandati/script_tab_mandati.js';
-import { pollResults } from './tab_rezultati/script_tab_rezultati.js';
-import { drawActivity } from './tab_aktivnost/script_tab_aktivnost.js';
-import { create, PartyResult, ElectionResults, generatorData, createdPollResults } from './tab_create_results/tab_create_result.js';
+import { createMap } from './js/tabs/script_tab_karta.js';
+import { createChart } from './js/tabs/script_tab_mandati.js';
+import { pollResults } from './js/tabs/script_tab_rezultati.js';
+import { drawActivity } from './js/tabs/script_tab_aktivnost.js';
+import { create, PartyResult, ElectionResults, generatorData, createdPollResults } from './js/tabs/tab_create_result.js';
 import { showLogin, showRegister } from 'js/user-controller.js';
 
 let $divContainer = $('#tab-content');
