@@ -170,9 +170,9 @@ function create() {
 
     let partyName = $('<form>').html(`Име на партия:<br>
 <input type="text" id="partyname" name="partyname"><br>
-Номер в бюлетината:<br>
+Номер в бюлетината: (* Въвейждайте резултатите в правилна последователност -> 1, 2, 3...)<br>
 <input type="text" id="number" name="number"><br>
-Резултат в проценти:<br>
+Резултат в проценти: (* Само резултати с над 2% ще се визуализират)<br>
 <input type="text" id="procents" name="procents"><br>
 Спечелени мандати:<br>
 <input type="text" id="mandates" name="mandates"><br>
